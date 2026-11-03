@@ -45,7 +45,7 @@ public class FINAL {
                     System.out.print(">");
                     clientes = ler.nextInt();
 
-                    if(clientes <0 || clientes>3) {
+                    if(clientes <0 || clientes>6) {
                         System.out.println("#### numero incorreto ####");
                         System.out.println("#############");
                         System.out.println("  ");
