@@ -1,5 +1,3 @@
-package org.example;
-
 import java.util.Scanner;
 
 public class FINAL {
@@ -28,8 +26,10 @@ public class FINAL {
                 System.out.println("#############");
                 System.out.println("  ");
                 System.out.println("  ");
-            }else {
-                System.out.println("#### você escolheu n: "+ menu + " ####");
+            }else if (menu>=1 || menu<4) {
+                System.out.println("#### você escolheu numero: "+ menu + " ####");
+            } else {
+                System.out.println("#### programa encerrado ####");
             }
             if(menu == 1) {
                 do{
@@ -52,12 +52,13 @@ public class FINAL {
                         System.out.println("  ");
                     }
 
-                }while(clientes !=0);
+                }while(clientes!= 0);
             }
 
-        }while(menu !=0);
+        }while(menu!= 0);
 
         System.out.println("######## Obrigado Por Usar Meu Codigo ########");
+
 
     }
 }
