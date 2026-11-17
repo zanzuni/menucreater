@@ -14,6 +14,15 @@ public class menucreater {
      static String[] campos = {
         "Código", "Nome", "CPF/CNPJ", "Data de nascimento",
         "Sexo", "Cidade", "Estado", "Status"
+
+     };
+
+     static int totalContatos = 0;
+
+    static String[][] contatos = new String[10][5];
+
+    static String[] camposContatos = {
+        "Código", "cliente", "Tipo", "valor", "Status"
      };
 
     public static void main(String[] args) {
@@ -40,49 +49,9 @@ public class menucreater {
             }else {
                 System.out.println("#### você escolheu n: "+ menu + " ####");
             }
+                    
             if(menu == 1) {
-                do{
-                    System.out.println("#### 1 - Incluir cliente ####");
-                    System.out.println("#### 2 - Listar clientes (todos os clientes)  ####");
-                    System.out.println("#### 3 - Consultar cliente por código  ####");
-                    System.out.println("#### 4 - Alterar cliente  ####");
-                    System.out.println("#### 5 - Apagar cliente  ####");
-                    System.out.println("#### 6 - Ordenar por nome  ####");
-                    System.out.println("#### 0 - Voltar  ####");
-
-                    System.out.println("#### qual você escolhe ? ####");
-                    clientes = ler.nextInt();
-
-                    if(clientes <0 || clientes>6) {
-                        System.out.println("#### numero incorreto ####");
-                        System.out.println("\n#############");
-                        
-                    }
-                    switch(clientes) {
-                        case 1:
-                            IncluirCliente();
-                            break;
-                        case 2:
-                            ListarClientes();
-                            break;
-                        case 3:
-                            ConsultarClientePorCodigo();
-                            break;
-                        case 4:
-                            AlterarCliente();
-                            break;
-                        case 5:
-                            ApagarCliente();
-                            break;
-                        case 6:
-                            OrdenarPorNome();
-                            break;
-                        case 0:
-                            System.out.println("Voltando ao menu principal...");
-                            break;
-                    }
-
-                }while(clientes !=0);
+                GerenciarClientes();
             }
 
             if(menu == 2) {
@@ -95,6 +64,56 @@ public class menucreater {
         System.out.println("######## Volte Sempre ########");
 
     }
+
+
+    public static void GerenciarClientes() {
+        Scanner ler = new Scanner(System.in);
+
+        do {
+            System.out.println("#### 1 - Incluir cliente ####");
+            System.out.println("#### 2 - Listar clientes ####");
+            System.out.println("#### 3 - Consultar cliente por código ####");
+            System.out.println("#### 4 - Alterar cliente ####");
+            System.out.println("#### 5 - Apagar cliente ####");
+            System.out.println("#### 6 - Ordenar clientes por nome ####");
+            System.out.println("#### 0 - Voltar ####");
+
+            System.out.println("#### qual você escolhe ? ####");
+            clientes = ler.nextInt();
+
+            if(clientes <0 || clientes>6) {
+                System.out.println("#### numero incorreto ####");
+                System.out.println("\n#############");
+                
+            }
+            switch(clientes) {
+                case 1:
+                    IncluirCliente();
+                    break;
+                case 2:
+                    ListarClientes();
+                    break;
+                case 3:
+                    ConsultarClientePorCodigo();
+                    break;
+                case 4:
+                    AlterarCliente();
+                    break;
+                case 5:
+                    ApagarCliente();
+                    break;
+                case 6:
+                    OrdenarPorNome();
+                    break;
+                case 0:
+                    System.out.println("Voltando ao menu principal...");
+                    break;
+            }
+
+        }while(clientes !=0);
+    }
+
+
 
     public static void IncluirCliente() {
 
@@ -243,7 +262,7 @@ public class menucreater {
 
   }
 
-public static void ApagarCliente() {
+ public static void ApagarCliente() {
     Scanner ler = new Scanner(System.in);
 
     System.out.println("\n######## APAGAR CLIENTE ########");
@@ -276,34 +295,36 @@ public static void ApagarCliente() {
   }
 
   public static void OrdenarPorNome() {
+
     if (totalClientes == 0) {
         System.out.println("Nenhum cliente cadastrado para ordenar.");
         return;
     }
 
     for (int i = 0; i < totalClientes - 1; i++) {
+
         for (int j = 0; j < totalClientes - i - 1; j++) {
+
             if (lista[j][1].compareToIgnoreCase(lista[j + 1][1]) > 0) {
+
                 String[] temp = lista[j];
+
                 lista[j] = lista[j + 1];
+
                 lista[j + 1] = temp;
             }
         }
     }
 
     System.out.println("Clientes ordenados por nome com sucesso!");
-  }
+
+    ListarClientes();
+ }
+
 
   public static void GerenciarContatos() {
-Scanner ler = new Scanner(System.in);
+  Scanner ler = new Scanner(System.in);
 
-static int totalContatos = 0;
-
-    String[][] contatos = new String[100][5];
-
-    String[] contatos = {
-        "Código", "cliente", "Tipo", "valor", "Status"
-     };
 
                 do{
                     System.out.println("#### 1 - Incluir contato ####");
@@ -355,11 +376,13 @@ static int totalContatos = 0;
 
                 for(int lin = 0; lin < lista.length; lin++) {
                     if (lista[lin][0].equals(codigoCliente)) {
+
                         if (totalContatos < contatos.length) {
+
                             System.out.println("\n--- Cadastrando Contato " + (totalContatos + 1) + " ---");
 
                             for (int col = 0; col < 5; col++) {
-                                System.out.print("Digite " + campos[col]);
+                                System.out.print("Digite " + camposContatos[col]);
                                 contatos[totalContatos][col] = ler.nextLine();
                             }
 
@@ -376,18 +399,91 @@ static int totalContatos = 0;
 
             public static void ListarContatos() {
                 Scanner ler = new Scanner(System.in);
+                System.out.println("\n######## LISTAR OS CONTATOS ########");
+                for(int i = 0; i < totalContatos; i++) {
+                    System.out.printf(
+                        "%-8s | %-18s | %-12s | %-20s | %-6s%n",
+                        camposContatos[0], camposContatos[1], camposContatos[2], camposContatos[3], camposContatos[4]
+                    );
+                    System.out.println("-------------------------------------------------------------");
+
+                    System.out.printf(
+                        "%-8s | %-18s | %-12s | %-20s | %-6s%n",
+                        contatos[i][0], contatos[i][1], contatos[i][2], contatos[i][3], contatos[i][4]
+                    );
+                    System.out.println("-------------------------------------------------------------");
+                }
             }
 
             public static void ConsultarContatoPorCodigo() {
                 Scanner ler = new Scanner(System.in);
+                System.out.println("\n######## CONSULTAR CONTATO ########");
+                System.out.print("\nDigite o código do contato: ");
+                String codigo = ler.nextLine();
+
+                for (int i = 0; i < totalContatos; i++) {
+                    if (contatos[i][0].equals(codigo)) {
+                        System.out.printf(
+                            "%-8s | %-18s | %-12s | %-20s | %-6s%n",
+                            camposContatos[0], camposContatos[1], camposContatos[2], camposContatos[3], camposContatos[4]
+                        );
+                        System.out.println("-------------------------------------------------------------");
+                        System.out.printf(
+                            "%-8s | %-18s | %-12s | %-20s | %-6s%n",
+                            contatos[i][0], contatos[i][1], contatos[i][2], contatos[i][3], contatos[i][4]
+                        );
+                        return;
+                    }
+                }
+                System.out.println("Contato não encontrado!");
             }
 
             public static void AlterarContato() {
                 
+                Scanner ler = new Scanner(System.in);
+                System.out.println("\n######## ALTERAR CONTATO ########");
+                System.out.print("\nDigite o código do contato que deseja alterar: ");
+                String codigo = ler.nextLine();
+
+                for (int i = 0; i < totalContatos; i++) {
+
+                    if (contatos[i][0].equals(codigo)) {
+
+                        System.out.println("\n######## CONTATO ENCONTRADO ########");
+                        for (int col = 1; col < 5; col++) {
+
+                            System.out.print("Digite novo " + camposContatos[col] + " (atual: " + contatos[i][col] + "): ");
+                            String novoValor = ler.nextLine();
+
+                            if (!novoValor.isEmpty()) {
+                                contatos[i][col] = novoValor;
+                            }
+                        }
+                        System.out.println("Contato alterado com sucesso!");
+                        return;
+                    }
+                }
+                System.out.println("Contato não encontrado!");
+                ler.close();
             }
 
             public static void ApagarContato() {
-                
+                Scanner ler = new Scanner(System.in);
+
+                System.out.println("\n######## APAGAR CONTATO ########");
+                System.out.print("\nDigite o código do contato que deseja apagar: ");
+                String codigo = ler.nextLine();
+
+                for (int i = 0; i < totalContatos; i++) {
+                    if (contatos[i][0].equals(codigo)) {
+                        for (int j = 0; j < 5; j++) {
+                            contatos[i][j] = "";
+                        }
+                        System.out.println("Contato apagado com sucesso!");
+                        return;
+                    }
+                }
+                System.out.println("Contato não encontrado!");
             }
 
 }
